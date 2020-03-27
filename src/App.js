@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+
+import GlobalStyle from "./component/globalStyle";
+import Header from "./component/header/index";
+import Month from "./component/month/index";
+import Legend from "./component/legend/index";
+import MonthProvider from "./store/dateContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Container>
+        <MonthProvider>
+          <Header />
+          <Month />
+        </MonthProvider>
+        <Legend />
+      </Container>
+    </>
   );
 }
+
+const Container = styled.div`
+  position: relative;
+  width: 420px;
+  margin: auto;
+  height: 570px;
+  background: #4a4a4a;
+`;
 
 export default App;
