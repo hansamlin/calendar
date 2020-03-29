@@ -1,23 +1,26 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import moment from "moment";
 import { DateContext } from "../../store/dateContext";
 
-export default ({ item }) => {
-  const { state } = useContext(DateContext);
+export default ({ item, index }) => {
+  const { date, setDate } = useContext(DateContext);
+
+  const handleClick = () => {
+    setDate(item.date);
+  };
 
   let detail = null;
-  if (state.sum === 0 && parseInt(moment().format("D")) === item.num) {
+  if (date === item.date) {
     detail = (
       <>
-        <Arrow></Arrow>
-        <Details>123</Details>
+        <Arrow />
+        <Details theme={{ index }}>{date}</Details>
       </>
     );
   }
 
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Name>{item.day}</Name>
       <Number opacity={item.active ? 1 : 0.3}>{item.num}</Number>
       <Event>
@@ -90,7 +93,7 @@ const Arrow = styled.div`
 
 const Details = styled.div`
   position: absolute;
-  left: 0;
+  left: calc(-60px * ${props => props.theme.index});
   top: calc(100% - 16px - 5px);
   width: 420px;
   height: 75px;
@@ -98,4 +101,8 @@ const Details = styled.div`
   margin-top: 16px;
   border-radius: 4px;
   color: #ffffff;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;

@@ -1,19 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
 import { DateContext } from "../../store/dateContext";
 
 export default ({ reverse }) => {
-  const { dispatch } = useContext(DateContext);
+  const { setSum } = useContext(DateContext);
 
   const handleClick = () => {
     if (reverse) {
-      dispatch({ type: "decrement" });
+      setSum(prev => prev - 1);
     } else {
-      dispatch({ type: "increment" });
+      setSum(prev => prev + 1);
     }
   };
 
-  return <Arrow reverse={reverse} onClick={handleClick} />;
+  return useMemo(
+    () => <Arrow reverse={reverse} onClick={handleClick} />,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 };
 
 const Arrow = styled.button`
