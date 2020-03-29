@@ -5,7 +5,8 @@ import { DateContext } from "../../store/dateContext";
 export default ({ item, index }) => {
   const { date, setDate } = useContext(DateContext);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setDate(item.date);
   };
 
@@ -20,9 +21,9 @@ export default ({ item, index }) => {
   }
 
   return (
-    <Container onClick={handleClick}>
+    <Container href="" onClick={handleClick}>
       <Name>{item.day}</Name>
-      <Number opacity={item.active ? 1 : 0.3}>{item.num}</Number>
+      <Number active={item.active ? 1 : 0.3}>{sprintf(item.num)}</Number>
       <Event>
         <DayEvent />
       </Event>
@@ -31,7 +32,11 @@ export default ({ item, index }) => {
   );
 };
 
-const Container = styled.button`
+const sprintf = (num) => {
+  return num < 10 ? `0${num}` : num;
+}
+
+const Container = styled.a`
   flex-basis: calc(100% / 7);
   text-align: center;
   border: 0;
@@ -43,6 +48,7 @@ const Container = styled.button`
   cursor: pointer;
   z-index: 100;
   position: relative;
+  text-decoration: none;
 `;
 
 const Name = styled.div`
@@ -56,7 +62,7 @@ const Name = styled.div`
 const Number = styled.div`
   font-size: 24px;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, ${props => props.opacity});
+  color: rgba(255, 255, 255, ${props => props.active});
 `;
 
 const Event = styled.div`

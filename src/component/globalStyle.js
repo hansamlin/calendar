@@ -9,9 +9,11 @@ const globalStyle = createGlobalStyle`
 }
 
 body {
-  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #4a4a4a;
+  font-weight: 600;
 }
 
 #root {
