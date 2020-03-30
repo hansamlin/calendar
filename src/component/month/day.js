@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useContext } from "react";
+import styled from "styled-components";
 import { DateContext } from "../../store/dateContext";
 import Detail from "./detail";
 
@@ -79,42 +79,4 @@ const DayEvent = styled.span`
   line-height: 5px;
   margin: 0 1px;
   background: rgba(153, 198, 109, 1);
-`;
-
-const Arrow = styled.div`
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0px;
-  height: 0px;
-  border-style: solid;
-  border-width: 0 5px 5px 5px;
-  border-color: transparent transparent rgba(164, 164, 164, 1) transparent;
-  position: absolute;
-`;
-
-const ani = keyframes`
-from {
-  height: 0px
-}
-
-to {
-  height: 75px;
-}
-`;
-
-const Details = styled.div`
-  position: absolute;
-  left: calc(-60px * ${props => props.theme.index});
-  top: calc(100% - 16px - 5px);
-  width: 420px;
-  background: rgba(164, 164, 164, 1);
-  margin-top: 16px;
-  border-radius: 4px;
-  color: #ffffff;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  animation: ${ani} forwards 1s;
 `;
