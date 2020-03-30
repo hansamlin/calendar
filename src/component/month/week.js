@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Day from "./day";
 
-export default ({ week }) => {
+export default ({ week, theme }) => {
   return (
-    <Container>
+    <Container theme={theme}>
       {week.map((element, index) => {
         return <Day item={element} key={index} index={index} />;
       })}

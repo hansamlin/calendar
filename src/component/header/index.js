@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Main from "./main";
 import Arrow from "./arrow";
+import { SumContext } from "../../store/sumContext";
 
 export default () => {
+  const { setSum } = useContext(SumContext);
+
+  const handlePrev = () => setSum(prev => prev - 1);
+  const handleNext = () => setSum(prev => prev + 1);
+
   return (
     <Container>
-      <Arrow reverse />
+      <Arrow reverse handleSum={handlePrev} />
       <Main />
-      <Arrow />
+      <Arrow handleSum={handleNext} />
     </Container>
   );
 };

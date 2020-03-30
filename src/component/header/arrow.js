@@ -1,20 +1,17 @@
 import React, { useContext, useMemo } from "react";
 import styled from "styled-components";
-import { DateContext } from "../../store/dateContext";
+import { OpacityContext } from "../../store/opacityContext";
 
-export default ({ reverse }) => {
-  const { setSum } = useContext(DateContext);
+export default ({ reverse, handleSum }) => {
+  const { setOpacity } = useContext(OpacityContext);
 
-  const handleClick = () => {
-    if (reverse) {
-      setSum(prev => prev - 1);
-    } else {
-      setSum(prev => prev + 1);
-    }
+  const handleOpacity = () => {
+    setOpacity(0);
+    handleSum();
   };
 
   return useMemo(
-    () => <Arrow reverse={reverse} onClick={handleClick} />,
+    () => <Arrow reverse={reverse} onClick={handleOpacity} />,
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );

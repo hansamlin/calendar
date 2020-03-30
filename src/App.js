@@ -5,17 +5,17 @@ import GlobalStyle from "./component/globalStyle";
 import Header from "./component/header/index";
 import Month from "./component/month/index";
 import Legend from "./component/legend/index";
-import MonthProvider from "./store/dateContext";
+import Provider from "./store/context";
 
 function App() {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <MonthProvider>
+        <Provider>
           <Header />
           <Month />
-        </MonthProvider>
+        </Provider>
         <Legend />
       </Container>
     </>

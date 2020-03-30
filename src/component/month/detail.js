@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { eventColor } from "./eventColor";
+import { DetailContext } from "../../store/detailContext";
 
 export default ({ index, event }) => {
-  console.log(event);
+  const { show } = useContext(DetailContext);
 
   let detail = null;
   if (event.length > 0) {
@@ -24,9 +25,11 @@ export default ({ index, event }) => {
   }
 
   return (
-    <Details theme={{ index }}>
-      <FadeIn>{detail}</FadeIn>
-    </Details>
+    show && (
+      <Details theme={{ index }}>
+        <FadeIn>{detail}</FadeIn>
+      </Details>
+    )
   );
 };
 
