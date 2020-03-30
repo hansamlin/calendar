@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
-import { DateContext } from "../../store/dateContext";
 import { eventColor } from "./eventColor";
 
 export default ({ index, event }) => {
@@ -9,7 +8,6 @@ export default ({ index, event }) => {
   let detail = null;
   if (event.length > 0) {
     detail = event.map((element, index) => {
-      console.log(element);
       return (
         <EventLink
           href=""
