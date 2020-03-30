@@ -15,7 +15,6 @@ export default ({ index }) => {
 const toggle = keyframes`
 from {
   height: 0px;
-  margin-top: 75px;
 }
 
 to {
@@ -63,5 +62,5 @@ to {
 `;
 
 const FadeIn = styled.div`
-  animation: ${fadeIn} 0.3s ease 0.3s both;
+  animation: ${fadeIn} 0.3s ease 0.5s both;
 `;
