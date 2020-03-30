@@ -1,23 +1,19 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
+import styled, { keyframes } from "styled-components";
 import { DateContext } from "../../store/dateContext";
+import Detail from "./detail";
 
 export default ({ item, index }) => {
   const { date, setDate } = useContext(DateContext);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault();
     setDate(item.date);
   };
 
   let detail = null;
   if (date === item.date) {
-    detail = (
-      <>
-        <Arrow />
-        <Details theme={{ index }}>{date}</Details>
-      </>
-    );
+    detail = <Detail index={index} />;
   }
 
   return (
@@ -32,9 +28,9 @@ export default ({ item, index }) => {
   );
 };
 
-const sprintf = (num) => {
+const sprintf = num => {
   return num < 10 ? `0${num}` : num;
-}
+};
 
 const Container = styled.a`
   flex-basis: calc(100% / 7);
@@ -43,7 +39,7 @@ const Container = styled.a`
   display: inline-block;
   background: transparent;
   width: 60px;
-  padding: 10px;
+  padding: 5px;
   vertical-align: top;
   cursor: pointer;
   z-index: 100;
@@ -97,12 +93,21 @@ const Arrow = styled.div`
   position: absolute;
 `;
 
+const ani = keyframes`
+from {
+  height: 0px
+}
+
+to {
+  height: 75px;
+}
+`;
+
 const Details = styled.div`
   position: absolute;
   left: calc(-60px * ${props => props.theme.index});
   top: calc(100% - 16px - 5px);
   width: 420px;
-  height: 75px;
   background: rgba(164, 164, 164, 1);
   margin-top: 16px;
   border-radius: 4px;
@@ -111,4 +116,5 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  animation: ${ani} forwards 1s;
 `;
