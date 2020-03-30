@@ -44,7 +44,7 @@ export default ({ item, index }) => {
   }
 
   return (
-    <Container href="" onClick={handleClick}>
+    <Container onClick={handleClick}>
       <Name>{item.day}</Name>
       <Number active={item.active ? 1 : 0.3}>{sprintf(item.num)}</Number>
       <Event>{dayEvent}</Event>

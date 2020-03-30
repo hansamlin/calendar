@@ -16,7 +16,7 @@ export default () => {
       num: i,
       day: moment(datetime)
         .set("date", i)
-        .format("dd"),
+        .format("ddd"),
       date: moment(datetime)
         .set("date", i)
         .format("Y-MM-DD"),
@@ -44,7 +44,7 @@ export default () => {
       dayArr = [
         {
           num: i,
-          day: prev.format("dd"),
+          day: prev.format("ddd"),
           date: prev.format("Y-MM-DD"),
           active: false
         }
@@ -66,7 +66,7 @@ export default () => {
 
       dayArr.push({
         num: i,
-        day: next.format("dd"),
+        day: next.format("ddd"),
         date: next.format("Y-MM-DD"),
         active: false
       });
