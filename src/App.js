@@ -26,7 +26,6 @@ const Container = styled.div`
   position: relative;
   width: 420px;
   margin: auto;
-  height: 570px;
   background: #4a4a4a;
 `;
 
