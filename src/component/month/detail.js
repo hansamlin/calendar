@@ -1,13 +1,33 @@
 import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { DateContext } from "../../store/dateContext";
+import { eventColor } from "./eventColor";
 
-export default ({ index }) => {
-  const { date } = useContext(DateContext);
+export default ({ index, event }) => {
+  console.log(event);
+
+  let detail = null;
+  if (event.length > 0) {
+    detail = event.map((element, index) => {
+      console.log(element);
+      return (
+        <EventLink
+          href=""
+          theme={{ background: eventColor.get(element.calendar) }}
+          onClick={e => e.preventDefault()}
+          key={index}
+        >
+          <EventName>{element.eventName}</EventName>
+        </EventLink>
+      );
+    });
+  } else {
+    detail = <EventName>No Events</EventName>;
+  }
 
   return (
     <Details theme={{ index }}>
-      <FadeIn>{date}</FadeIn>
+      <FadeIn>{detail}</FadeIn>
     </Details>
   );
 };
@@ -31,11 +51,9 @@ const Details = styled.div`
   margin-top: 16px;
   border-radius: 4px;
   color: #ffffff;
-  font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 7px 0;
   animation: ${toggle} forwards 0.5s ease;
+  text-align: justify;
 
   &:before {
     content: "";
@@ -63,4 +81,27 @@ to {
 
 const FadeIn = styled.div`
   animation: ${fadeIn} 0.3s ease 0.5s both;
+`;
+
+const EventLink = styled.a`
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  color: #fff;
+  padding: 2px 16px;
+  display: block;
+
+  &:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    margin: 6px 0 0;
+    display: inline-block;
+    background: ${props => props.theme.background};
+  }
+`;
+
+const EventName = styled.span`
+  display: inline-block;
+  padding: 0 0 0 7px;
+  font-size: 16px;
 `;

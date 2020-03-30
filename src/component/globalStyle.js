@@ -21,6 +21,10 @@ body {
   height: 100vh;
 }
 
+a {
+  text-decoration: none;
+}
+
 `;
 
 export default globalStyle;

@@ -2,6 +2,24 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { DateContext } from "../../store/dateContext";
 import Detail from "./detail";
+import { eventColor } from "./eventColor";
+
+const calendar = [
+  { calendar: "work", eventName: "Lunch Meeting w/ Mark", date: "2020-03-15" },
+  {
+    calendar: "work",
+    eventName: "Interview - Jr. Web Developer",
+    date: "2020-03-16"
+  },
+  { calendar: "work", eventName: "Dinner w/ Marketing", date: "2020-03-21" },
+
+  { calendar: "sports", eventName: "Game vs Houston", date: "2020-03-18" },
+  { calendar: "sports", eventName: "Game vs Denver", date: "2020-03-21" },
+
+  { calendar: "kids", eventName: "Ice Cream Night", date: "2020-03-31" },
+
+  { calendar: "other", eventName: "Teach Kids to Code", date: "2020-03-24" }
+];
 
 export default ({ item, index }) => {
   const { date, setDate } = useContext(DateContext);
@@ -11,18 +29,25 @@ export default ({ item, index }) => {
     setDate(item.date);
   };
 
+  const event = calendar.filter(element => element.date === item.date);
+
+  let dayEvent = null;
+  if (event) {
+    dayEvent = event.map((element, index) => {
+      return <DayEvent work={eventColor.get(element.calendar)} key={index} />;
+    });
+  }
+
   let detail = null;
   if (date === item.date) {
-    detail = <Detail index={index} />;
+    detail = <Detail index={index} event={event} />;
   }
 
   return (
     <Container href="" onClick={handleClick}>
       <Name>{item.day}</Name>
       <Number active={item.active ? 1 : 0.3}>{sprintf(item.num)}</Number>
-      <Event>
-        <DayEvent />
-      </Event>
+      <Event>{dayEvent}</Event>
       {detail}
     </Container>
   );
@@ -32,7 +57,7 @@ const sprintf = num => {
   return num < 10 ? `0${num}` : num;
 };
 
-const Container = styled.a`
+const Container = styled.div`
   flex-basis: calc(100% / 7);
   text-align: center;
   border: 0;
@@ -44,7 +69,6 @@ const Container = styled.a`
   cursor: pointer;
   z-index: 100;
   position: relative;
-  text-decoration: none;
 `;
 
 const Name = styled.div`
@@ -78,5 +102,5 @@ const DayEvent = styled.span`
   height: 5px;
   line-height: 5px;
   margin: 0 1px;
-  background: rgba(153, 198, 109, 1);
+  background: ${props => props.work};
 `;
